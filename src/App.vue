@@ -8,7 +8,7 @@ import { routerLinks } from './router/link-routes';
   <div class="wrapper">
     <header>
       <NavBar 
-        title="Breaking Bad"
+        title="Movies"
         :links="routerLinks"
       />
     </header>

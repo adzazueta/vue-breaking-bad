@@ -2,7 +2,7 @@
 
 <template>
   <div>
-    <h1>Character Id Page</h1>
+    <h1>Movie List Page</h1>
   </div>
 </template>
 

@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 import HomePage from '@/shared/pages/HomePage.vue';
 import AboutPage from '@/shared/pages/AboutPage.vue';
-import characterRoute from '@/characters/router';
+import movieRoute from '@/movies/router';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -11,10 +11,10 @@ const router = createRouter({
     { path: '/', name: 'home', component: HomePage },
     { path: '/about', name: 'about', component: AboutPage },
 
-    // Characters
-    { ...characterRoute, path: '/characters' },
-    // characterRoute,
-    // { path: '/characters', name: 'characters', component: () => import('@/characters/layout/CharacterLayout.vue') },
+    // Movies
+    { ...movieRoute, path: '/movies' },
+    // movieRoute,
+    // { path: '/movies', name: 'movies', component: () => import('@/movies/layout/MovieLayout.vue') },
     
     // Default
     { path: '/:pathMatch(.*)*', redirect: () => ({ name: 'home' }) }

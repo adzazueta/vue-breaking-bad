@@ -3,9 +3,9 @@ import { RouterView } from 'vue-router';
 import type { RouterLink } from '@/router/link-routes';
 
 import NavBar from '@/shared/components/NavBar.vue';
-import charactersRoute from '@/characters/router';
+import moviesRoute from '@/movies/router';
 
-const routeLinks: RouterLink[] = charactersRoute.children!
+const routeLinks: RouterLink[] = moviesRoute.children!
   .filter(route => (route.props as { visible: boolean }).visible)
   .map(route => ({
     name: route.name as string,
@@ -15,7 +15,7 @@ const routeLinks: RouterLink[] = charactersRoute.children!
 </script>
 
 <template>
-  <h1>Characters</h1>
+  <h1>Movies</h1>
 
   <!-- Navbar -->
   <NavBar
