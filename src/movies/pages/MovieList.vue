@@ -1,9 +1,12 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import CardList from '@/movies/components/CardList.vue'
+
+const props = defineProps<{ title: string, visible: boolean }>();
+</script>
 
 <template>
-  <div>
-    <h1>Movie List Page</h1>
-  </div>
+  <h2>{{ props.title }}</h2>
+  <CardList />
 </template>
 
 <style scoped></style>
