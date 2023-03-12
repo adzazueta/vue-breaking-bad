@@ -1,18 +1,42 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useQuery } from '@tanstack/vue-query';
+
 import moviesApi from '@/api/moviesApi';
-import type { TitlesResponse, Movie } from '@/movies/interfaces/movies';
 import { useMovies } from '@/movies/composables/useMovies';
 
-// const { data: movies } = await moviesApi.get<TitlesResponse>('/titles'); => With Suspense
+import type { TitlesResponse, Movie } from '@/movies/interfaces/movies';
 
-const { movies, isLoading, hasError, errorMessage } = useMovies();
+// 1- Normal suspense
+// const { data: movies } = await moviesApi.get<TitlesResponse>('/titles');
+
+// 2- Composable functions
+// const { movies, isLoading, hasError, errorMessage } = useMovies();
+
+// 3- TanStack Query
+const getMoviesSlow = async (): Promise<Movie[]> => {
+  return new Promise((resolve) => {
+    setTimeout(async () => {
+      const { data } = await moviesApi.get<TitlesResponse>('/titles');
+      resolve(data.results);
+    }, 3000);
+  })
+}
+
+const { isLoading, isError, data: movies, error } = useQuery(
+  ['movies'],
+  getMoviesSlow,
+  {
+    cacheTime: 1000 * 60,
+    refetchOnReconnect: 'always'
+  }
+);
 
 </script>
 
 <template>
   <h2 v-if="isLoading">Loading...</h2>
-  <h2 v-if="hasError">{{ errorMessage }}</h2>
+  <h2 v-if="isError">{{ error }}</h2>
   <ul>
     <li
       v-for="movie in movies"
