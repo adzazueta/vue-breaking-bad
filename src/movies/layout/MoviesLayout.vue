@@ -23,8 +23,10 @@ const routeLinks: RouterLink[] = moviesRoute.children!
     :show-icon="false"
   />
 
-  <!-- RouterView + Suspense -->
-  <RouterView />
+  <!-- RouterView + Suspense? -->
+  <!-- <Suspense> -->
+    <RouterView />
+  <!-- </Suspense> -->
 </template>
 
 <style scoped></style>

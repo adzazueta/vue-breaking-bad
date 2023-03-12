@@ -1,21 +1,25 @@
 <script setup lang="ts">
-import moviesApi from '@/api/moviesApi'
-import type { TitlesResponse } from '@/movies/interfaces/movies';
+import { ref } from 'vue';
+import moviesApi from '@/api/moviesApi';
+import type { TitlesResponse, Movie } from '@/movies/interfaces/movies';
+import { useMovies } from '@/movies/composables/useMovies';
 
-moviesApi.get<TitlesResponse>('/titles')
-  .then(response => {
-    const movieTitle = response.data.results[0].titleText.text;
-    console.log({ title: movieTitle });
-  });
+// const { data: movies } = await moviesApi.get<TitlesResponse>('/titles'); => With Suspense
+
+const { movies, isLoading, hasError, errorMessage } = useMovies();
 
 </script>
 
 <template>
+  <h2 v-if="isLoading">Loading...</h2>
+  <h2 v-if="hasError">{{ errorMessage }}</h2>
   <ul>
-    <li>Hola</li>
-    <li>Hola</li>
-    <li>Hola</li>
-    <li>Hola</li>
+    <li
+      v-for="movie in movies"
+      :key="movie.id"
+    >
+      {{ movie.titleText.text }}
+    </li>
   </ul>
 </template>
 

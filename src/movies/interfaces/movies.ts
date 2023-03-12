@@ -4,10 +4,10 @@ export interface TitlesResponse {
   page:    number;
   next:    string;
   entries: number;
-  results: Title[];
+  results: Movie[];
 }
 
-export interface Title {
+export interface Movie {
   id:            string;
   primaryImage?: PrimaryImage;
   titleType:     TitleType;
