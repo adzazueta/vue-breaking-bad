@@ -1,10 +1,13 @@
 <script setup lang="ts">
-import moviesApi from '@/api/moviesApi';
+import moviesApi from '@/api/moviesApi'
+import type { TitlesResponse } from '@/movies/interfaces/movies';
 
-moviesApi.get('/titles')
+moviesApi.get<TitlesResponse>('/titles')
   .then(response => {
-    console.log({ data: response.data })
+    const movieTitle = response.data.results[0].titleText.text;
+    console.log({ title: movieTitle });
   });
+
 </script>
 
 <template>
