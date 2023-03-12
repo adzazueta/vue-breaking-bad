@@ -1,9 +1,30 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { RouterView } from 'vue-router';
+import type { RouterLink } from '@/router/link-routes';
+
+import NavBar from '@/shared/components/NavBar.vue';
+import charactersRoute from '@/characters/router';
+
+const routeLinks: RouterLink[] = charactersRoute.children!
+  .filter(route => (route.props as { visible: boolean }).visible)
+  .map(route => ({
+    name: route.name as string,
+    path: route.path,
+    title: (route.props as { title: string, visible: boolean }).title
+  }))
+</script>
 
 <template>
-  <div>
-    <h1>Character Layout Page</h1>
-  </div>
+  <h1>Characters</h1>
+
+  <!-- Navbar -->
+  <NavBar
+    :links="routeLinks"
+    :show-icon="false"
+  />
+
+  <!-- RouterView + Suspense -->
+  <RouterView />
 </template>
 
 <style scoped></style>
